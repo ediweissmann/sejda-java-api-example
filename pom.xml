@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<description>Package containing examples on how to use Sejda.</description>
+	<description>Package containing examples on how to use Sejda PDF.</description>
 	<url>http://www.sejda.org</url>
 
 	<groupId>org.sejda</groupId>
 	<artifactId>sejda-example</artifactId>
-	<version>1.0</version>
+	<version>1.0.1</version>
 
 	<properties>
-		<sejda.version>3.0.0.M1-SNAPSHOT</sejda.version>
+		<sejda.version>3.0.0.M31</sejda.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
-	<!-- sejda is hosted on bintray -->
 	<repositories>
 		<repository>
-			<id>bintray sejda</id>
-			<url>http://dl.bintray.com/sejdapdf/maven</url>
+			<id>sejda PRO</id>
+			<url>http://mvn.sejda.org/</url>
 		</repository>
 	</repositories>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.sejda</groupId>
-			<artifactId>sejda-sambox</artifactId>
+			<artifactId>sejda-core-pro</artifactId>
 			<version>${sejda.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sejda</groupId>
-			<artifactId>sejda-icepdf</artifactId>
+			<artifactId>sejda-sambox-pro</artifactId>
 			<version>${sejda.version}</version>
 		</dependency>
 	</dependencies>

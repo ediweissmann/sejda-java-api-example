@@ -5,14 +5,17 @@ import java.io.File;
 import org.sejda.core.notification.context.GlobalNotificationContext;
 import org.sejda.core.service.DefaultTaskExecutionService;
 import org.sejda.core.service.TaskExecutionService;
+import org.sejda.model.TopLeftRectangularBox;
 import org.sejda.model.exception.SejdaRuntimeException;
 import org.sejda.model.input.PdfFileSource;
 import org.sejda.model.notification.EventListener;
 import org.sejda.model.notification.event.PercentageOfWorkDoneChangedEvent;
 import org.sejda.model.notification.event.TaskExecutionCompletedEvent;
 import org.sejda.model.notification.event.TaskExecutionFailedEvent;
-import org.sejda.model.output.DirectoryTaskOutput;
+import org.sejda.model.output.ExistingOutputPolicy;
+import org.sejda.model.output.FileOrDirectoryTaskOutput;
 import org.sejda.model.parameter.SplitByPagesParameters;
+import org.sejda.model.parameter.SplitByTextContentParameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,20 +31,49 @@ public final class SampleCode {
     private static final Logger LOG = LoggerFactory.getLogger(SampleCode.class);
 
     public static void main(String[] args) {
+        exampleSplitByPages();
+        exampleSplitByText();
+    }
+
+    private static void exampleSplitByPages() {
         // configure the split by pages task
         SplitByPagesParameters taskParameters = new SplitByPagesParameters();
         // which file should be split
-        taskParameters.setSource(PdfFileSource.newInstanceNoPassword(new File("/Users/edi/Desktop/test.pdf")));
+        taskParameters.addSource(PdfFileSource.newInstanceNoPassword(new File("/Users/edi/Desktop/test.pdf")));
         // split at page 10 and 20
         taskParameters.addPage(10);
         taskParameters.addPage(20);
+
         // where to output PDF document results
-        taskParameters.setOutput(new DirectoryTaskOutput(new File("/Users/edi/Desktop")));
+        taskParameters.setExistingOutputPolicy(ExistingOutputPolicy.OVERWRITE);
+        taskParameters.setOutput(new FileOrDirectoryTaskOutput(new File("/tmp/output1")));
 
         // register listeners to get events about progress, failure, completion.
         registerTaskListeners();
 
-        // execute the split
+        // execute the task
+        TaskExecutionService taskExecutionService = new DefaultTaskExecutionService();
+        taskExecutionService.execute(taskParameters);
+    }
+
+    private static void exampleSplitByText() {
+        // configure the split by text task
+
+        // text area boundaries
+        TopLeftRectangularBox textArea = new TopLeftRectangularBox(10, 20, 100, 200);
+        SplitByTextContentParameters taskParameters = new SplitByTextContentParameters(textArea);
+
+        // inputs
+        taskParameters.addSource(PdfFileSource.newInstanceNoPassword(new File("/Users/edi/Desktop/test.pdf")));
+
+        // where to output PDF document results
+        taskParameters.setExistingOutputPolicy(ExistingOutputPolicy.OVERWRITE);
+        taskParameters.setOutput(new FileOrDirectoryTaskOutput(new File("/tmp/output2")));
+
+        // register listeners to get events about progress, failure, completion.
+        registerTaskListeners();
+
+        // execute the task
         TaskExecutionService taskExecutionService = new DefaultTaskExecutionService();
         taskExecutionService.execute(taskParameters);
     }
