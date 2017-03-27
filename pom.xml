@@ -9,15 +9,25 @@
 	<version>1.0.1</version>
 
 	<properties>
-		<sejda.version>3.0.0</sejda.version>
+		<sejda.version>3.0.2</sejda.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
+	<!-- Add to your ~/.m2/settings.xml -->
+	<!--
+
+	<server>
+		<id>mvn.sejda.com</id>
+		<username>your-sejda-pro-username</username>
+		<password>your-sejda-pro-password</password>
+	</server>
+
+	-->
 	<repositories>
 		<repository>
-			<id>sejda PRO</id>
-			<url>http://mvn.sejda.org/</url>
+			<id>mvn.sejda.com</id>
+			<url>http://mvn.sejda.com/artifactory/libs-release</url>
 		</repository>
 	</repositories>
 
