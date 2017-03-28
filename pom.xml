@@ -29,6 +29,10 @@
 			<id>mvn.sejda.com</id>
 			<url>http://mvn.sejda.com/artifactory/libs-release</url>
 		</repository>
+		<repository>
+			<id>sejda OSS</id>
+			<url>http://dl.bintray.com/sejdapdf/maven</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
